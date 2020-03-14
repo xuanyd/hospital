@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.dao.NoticeMapper">
+    <resultMap id="BaseResultMap" type="com.server.entity.Notice">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="noticeType" jdbcType="VARCHAR" property="noticeType" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="subTitle" jdbcType="VARCHAR" property="subTitle" />
+        <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        n.id, n.noticeType, n.title, n.subTitle, n.addTime
+    </sql>
+
+    <select id="selectPage"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_n_notice n
+    </select>
+
+</mapper>

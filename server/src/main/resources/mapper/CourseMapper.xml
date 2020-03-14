@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.dao.CourseMapper">
+    <resultMap id="BaseResultMap" type="com.server.entity.Course">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="teacher" jdbcType="INTEGER" property="teacher" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        c.id, c.name, c.teacher, c.desc, c.createTime
+    </sql>
+    <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_c_course c
+    </select>
+</mapper>

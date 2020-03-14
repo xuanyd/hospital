@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.dao.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.server.entity.Role">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        r.id, r.name, r.status, r.desc
+    </sql>
+    <select id="selectByParams" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_s_role r
+    </select>
+</mapper>

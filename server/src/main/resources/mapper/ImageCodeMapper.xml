@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.dao.ImageCodeMapper">
+    <resultMap id="BaseResultMap" type="com.server.entity.ImgCode">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="secret" jdbcType="VARCHAR" property="secret" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        c.id, c.secret, c.code, c.`type`, c.create_time
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_s_img_code c
+        where u.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.server.entity.ImgCode">
+        insert into t_s_img_code (id, secret, code,
+        type, create_time)
+        values (#{id,jdbcType=INTEGER}, #{secret,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="getByCodeTypeAndSecret" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_s_img_code c
+        where c.code= #{code,jdbcType=VARCHAR} and c.secret= #{secret,jdbcType=VARCHAR} and `type` =  #{type,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByParams" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_s_img_code c
+    </select>
+
+</mapper>

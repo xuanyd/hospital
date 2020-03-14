@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.dao.OSSFilePathMapper">
+    <resultMap id="BaseResultMap" type="com.server.entity.OSSFilePath">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="pid" jdbcType="INTEGER" property="pId" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="full_path" jdbcType="VARCHAR" property="fullPath" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        fp.id, fp.pid, fp.path, fp.full_path
+    </sql>
+
+    <insert id="insertParent" parameterType="com.server.entity.OSSFilePath">
+        insert into t_f_file_path (pid, path, full_path)
+        values (0, #{path,jdbcType=VARCHAR}, #{fullPath,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertChild" parameterType="java.util.Map">
+        insert into t_f_file_path (pid, path, full_path)
+          select id, #{path,jdbcType=VARCHAR},#{fullPath,jdbcType=VARCHAR}
+          from t_f_file_path where full_path = #{parentPath,jdbcType=VARCHAR}
+    </insert>
+
+    <select id="selectByFullPath" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_f_file_path fp
+        where fp.full_path = #{fullPath,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_f_file_path fp
+    </select>
+
+</mapper>

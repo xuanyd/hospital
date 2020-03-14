@@ -1,0 +1,49 @@
+<div class="operate">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" 
+        style="width: 20%;margin-bottom: 20px;">
+      <input type="text" nz-input [(ngModel)]="username" placeholder="输入标题名搜索" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch (click)="queryUsers(true)">
+            <i nz-icon nzType="search"></i>
+        </button>
+    </ng-template>
+</div>
+<nz-table #userTable
+    [nzFrontPagination]="false"
+    [nzShowSizeChanger]="true"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    (nzPageIndexChange)="queryUsers()"
+    (nzPageSizeChange)="queryUsers(true)"
+    nzSize="middle" 
+    [nzScroll]="{ x: '1000px', y: '300px' }"
+    [nzData]="userList">
+    <thead>
+        <tr>
+            <th nzWidth="100px">姓名</th>
+            <th nzWidth="100px">手机号</th>
+            <th nzWidth="50px">状态</th>
+            <th nzWidth="150px">注册时间</th>
+            <th nzWidth="50px">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of userTable.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.phone }}</td>
+            <td>
+                <i nz-icon nzType="check" *ngIf="data.valid==1" style="color: green;margin-left: 5px;"></i>
+                <i nz-icon nzType="close" *ngIf="data.valid==0"style="color: red;margin-left: 5px;"></i>
+            </td>
+            <td>{{ data.createtime }}</td>
+            <td>
+                <a (click)="delete(data.id, data.name)" *ngIf="data.valid==0">
+                    <i nz-icon nzType="check-circle" nzTheme="outline"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,20 @@
+<form nz-form [formGroup]="validateForm">
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="name">机构名称</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="name" id="name" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="plantform_name">平台名称</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="plantform_name" id="plantform_name" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzFor="seo_key">SEO优化关键字</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="seo_key" id="seo_key" />
+        </nz-form-control>
+    </nz-form-item>
+</form>

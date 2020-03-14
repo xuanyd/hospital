@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.server.dao.TokenMapper">
+    <resultMap id="BaseResultMap" type="com.server.entity.Token">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="token" jdbcType="VARCHAR" property="token" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="userId" jdbcType="INTEGER" property="userId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        t.id, t.type, t.phone, t.token, t.createTime, t.status, t.userId
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_s_token t
+        where t.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.server.entity.Token">
+        insert into
+            t_s_token (id, `type`, phone, token, create_time, status,user_id)
+        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+            #{token,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER},
+            #{userId,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectByParams" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_s_token t
+    </select>
+</mapper>
