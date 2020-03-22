@@ -3,14 +3,14 @@
 <mapper namespace="com.server.dao.NoticeMapper">
     <resultMap id="BaseResultMap" type="com.server.entity.Notice">
         <id column="id" jdbcType="INTEGER" property="id" />
-        <result column="noticeType" jdbcType="VARCHAR" property="noticeType" />
+        <result column="notice_type" jdbcType="VARCHAR" property="noticeType" />
         <result column="title" jdbcType="VARCHAR" property="title" />
-        <result column="subTitle" jdbcType="VARCHAR" property="subTitle" />
-        <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        n.id, n.noticeType, n.title, n.subTitle, n.addTime
+        n.id, n.notice_type, n.title, n.sub_title, n.add_time
     </sql>
 
     <select id="selectPage"  resultMap="BaseResultMap">

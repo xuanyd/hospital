@@ -1,5 +1,4 @@
 package com.server.admin.service;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.server.dao.NoticeMapper;
@@ -17,11 +16,9 @@ public class NoticeServiceImpl implements NoticeService {
     private NoticeMapper noticeMapper;
 
     @Override
-    public PageInfo getNoticePage(PageRequest pageRequest, String title) {
-        int pageNum = pageRequest.getPageNum();
-        int pageSize = pageRequest.getPageSize();
+    public PageInfo getNoticePage(int pageNum, int pageSize, String title) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Notice> notices = noticeMapper.findPage();
+        List<Notice> notices = noticeMapper.selectPage();
         return new PageInfo<Notice>(notices);
     }
 }

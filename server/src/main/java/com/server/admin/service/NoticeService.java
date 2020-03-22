@@ -4,5 +4,5 @@ import com.github.pagehelper.PageInfo;
 import com.server.util.PageRequest;
 
 public interface NoticeService {
-    PageInfo getNoticePage(PageRequest pageQuery, String title);
+    PageInfo getNoticePage(int pageNum, int pageSize, String title);
 }

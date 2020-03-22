@@ -4,7 +4,7 @@
       <input type="text" nz-input [(ngModel)]="username" placeholder="输入标题名搜索" />
     </nz-input-group>
     <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch (click)="queryUsers(true)">
+        <button nz-button nzType="primary" nzSearch (click)="queryPages(true)">
             <i nz-icon nzType="search"></i>
         </button>
     </ng-template>
@@ -14,31 +14,26 @@
     [nzShowSizeChanger]="true"
     [nzLoading]="loading"
     [nzTotal]="total"
-    [(nzPageIndex)]="pageIndex"
+    [(nzPageIndex)]="pageNum"
     [(nzPageSize)]="pageSize"
-    (nzPageIndexChange)="queryUsers()"
-    (nzPageSizeChange)="queryUsers(true)"
+    (nzPageIndexChange)="queryPages()"
+    (nzPageSizeChange)="queryPages(true)"
     nzSize="middle" 
     [nzScroll]="{ x: '1000px', y: '300px' }"
     [nzData]="userList">
     <thead>
         <tr>
-            <th nzWidth="100px">姓名</th>
-            <th nzWidth="100px">手机号</th>
-            <th nzWidth="50px">状态</th>
-            <th nzWidth="150px">注册时间</th>
+            <th nzWidth="100px">所属栏目</th>
+            <th nzWidth="100px">标题</th>
+            <th nzWidth="100px">创建日期</th>
             <th nzWidth="50px">操作</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of userTable.data">
-            <td>{{ data.name }}</td>
-            <td>{{ data.phone }}</td>
-            <td>
-                <i nz-icon nzType="check" *ngIf="data.valid==1" style="color: green;margin-left: 5px;"></i>
-                <i nz-icon nzType="close" *ngIf="data.valid==0"style="color: red;margin-left: 5px;"></i>
-            </td>
-            <td>{{ data.createtime }}</td>
+            <td>{{ data.noticeType }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.addTime }}</td>
             <td>
                 <a (click)="delete(data.id, data.name)" *ngIf="data.valid==0">
                     <i nz-icon nzType="check-circle" nzTheme="outline"></i>

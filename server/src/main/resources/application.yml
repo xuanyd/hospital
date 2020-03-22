@@ -15,6 +15,7 @@ spring:
   jackson:
     joda-date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
   mvc:
     static-path-pattern: /img/**
   resources:
@@ -30,6 +31,7 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+    page-size-zorro: true
 
 oss:
   endpoint: http://oss-cn-beijing.aliyuncs.com

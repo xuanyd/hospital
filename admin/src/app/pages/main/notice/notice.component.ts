@@ -13,7 +13,7 @@ import { NzMessageService, NzModalRef,NzModalService} from 'ng-zorro-antd';
 
 export class NoticeComponent implements OnInit {
 
-    pageIndex = 1;
+    pageNum = 1;
     pageSize = 10;
     total = 1;
     userList: any[] = [];
@@ -29,22 +29,22 @@ export class NoticeComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.queryUsers();
+      this.queryPages();
     }
 
-    queryUsers(reset: boolean = false) {
+    queryPages(reset: boolean = false) {
       let that = this;
       if (reset) {
-        that.pageIndex = 1;
+        that.pageNum = 1;
       }
       this.loading = true;
-      this.noticeService.getPages(this.pageIndex, this.pageSize, {nameOrPhone:this.username}).subscribe((data: any) => {
+      this.noticeService.getPages(this.pageNum, this.pageSize, {nameOrPhone:this.username}).subscribe((data: any) => {
         that.loading = false;
         if(data.code === 200) {
           that.loading = false;
           that.userList = data.data.list;
-          that.total = data.total;
-          that.pageIndex = 1;
+          that.total = data.data.total;
+          that.pageNum = data.data.pageNum;
         } else {
           alert(data.message);
         }
@@ -61,7 +61,7 @@ export class NoticeComponent implements OnInit {
             if(data.code === 200) {
               this.message.create("success", "删除文章成功！");
               this.confirmModal.close();
-              this.queryUsers();
+              this.queryPages();
             } else {
               this.message.create("error", "删除文章失败！");
               this.confirmModal.close();

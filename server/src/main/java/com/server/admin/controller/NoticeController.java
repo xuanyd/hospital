@@ -8,10 +8,7 @@ import com.server.util.PageRequest;
 import com.server.util.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +22,12 @@ public class NoticeController {
     private NoticeService noticeService;
 
     @RequestMapping(value = "notice/list", method = RequestMethod.POST)
-    public Map getNoticePage(@RequestBody PageRequest pageQuery, String title) {
+    public Map getNoticePage(
+            @RequestParam(value = "page", required = true, defaultValue="1") Integer page,
+            @RequestParam(value = "pageSize", required = true, defaultValue="10") Integer pageSize,
+            String title) {
         Map retMap = new HashMap();
-        PageInfo noticeInfo =  noticeService.getNoticePage(pageQuery, title);
+        PageInfo noticeInfo =  noticeService.getNoticePage(page, pageSize, title);
         retMap.put("code", ResultCode.SUCCESS);
         retMap.put("data", noticeInfo);
         return retMap;
